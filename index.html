@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spinach Ice Cream | Authenticity Node</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- APP BRANDING -->
+        <div class="header">
+            <h1>🌿 Spinach Ice Cream Original</h1>
+            <p id="subtitle">Supply Chain Ledger System</p>
+        </div>
+
+        <!-- VIEW 1: ADMIN DASHBOARD (Where you generate the barcodes) -->
+        <div id="admin-view" class="glass-panel">
+            <h2 style="font-size: 1.2rem; margin-bottom: 1.5rem; text-align: center; font-weight: 300;">Mint Product
+                Tokens</h2>
+
+            <div class="form-group grid-2">
+                <div>
+                    <label>Batch Code</label>
+                    <input type="text" id="batchId" placeholder="e.g. BATCH-001" value="SIC-B001">
+                </div>
+                <div>
+                    <label>Qty to Generate</label>
+                    <input type="number" id="qty" min="1" max="500" value="20">
+                </div>
+            </div>
+
+            <div class="form-group grid-2">
+                <div>
+                    <label>Manufacturing Date</label>
+                    <input type="date" id="mfgDate">
+                </div>
+                <div>
+                    <label>Expiry Date</label>
+                    <input type="date" id="expDate">
+                </div>
+            </div>
+
+            <button onclick="mintToken()">Generate Batch Ledger</button>
+
+            <!-- Results container after generating -->
+            <div id="result-section">
+                <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 1rem;">Batch Token Signatures Created!
+                </p>
+                <div class="token-hash" id="tokenDisplay"
+                    style="margin-bottom: 1rem; font-size: 0.85rem; text-align: center;">---</div>
+
+                <div class="grid-2">
+                    <button onclick="showPrintView()"
+                        style="margin-top: 0; background: linear-gradient(135deg, #3B82F6, #2563EB);">🖨️ View & Print
+                        Labels</button>
+                    <button class="secondary" onclick="simulateScan()" style="margin-top: 0;">Simulate Sample
+                        Scan</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 2: CUSTOMER VERIFICATION (What people see when they scan) -->
+        <div id="verify-view" class="glass-panel" style="text-align: center;">
+            <div class="status-badge verified" id="statusBadge">Authentic Product Verified</div>
+
+            <h2 style="margin-bottom: 1.5rem; font-size: 1.4rem;">Product Details</h2>
+
+            <div class="data-grid">
+                <div class="data-item">
+                    <span>Product</span>
+                    <strong>Spinach Ice Cream</strong>
+                </div>
+                <div class="data-item">
+                    <span>Item TRACE ID</span>
+                    <strong id="v-batch">---</strong>
+                </div>
+                <div class="data-item">
+                    <span>Mfg Date</span>
+                    <strong id="v-mfg">---</strong>
+                </div>
+                <div class="data-item">
+                    <span>Best Before</span>
+                    <strong id="v-exp">---</strong>
+                </div>
+            </div>
+
+            <div style="text-align: left;">
+                <label>Cryptographic Signature (Ledger Hash)</label>
+                <div class="token-hash" id="v-hash" style="font-size: 0.75rem;">0x...</div>
+            </div>
+
+            <button onclick="goBack()" style="margin-top: 2rem;">Back to System</button>
+        </div>
+
+    </div>
+
+    <!-- VIEW 3: PRINT SHEET (Hidden on screens until activated) -->
+    <div id="print-view">
+        <div class="no-print controls"
+            style="text-align: center; margin-bottom: 2rem; padding: 1.5rem; background: var(--panel); border-radius: 12px; border: 1px solid rgba(46, 232, 152, 0.15);">
+            <h2 style="margin-bottom: 1rem;">🖨️ Print Preview</h2>
+            <p style="color: var(--text); margin-bottom: 1rem; font-size: 0.95rem;">Load your sticker paper and press
+                <strong>Ctrl+P</strong> or click the Print button below. <br>To ensure correct sizes, set margins to
+                "None" or "Minimum" in the print dialog.</p>
+            <div style="display: flex; gap: 10px; justify-content: center; max-width: 400px; margin: 0 auto;">
+                <button onclick="hidePrintView()" class="secondary" style="margin-top:0;">Back to Dashboard</button>
+                <button onclick="window.print()"
+                    style="margin-top:0; background: linear-gradient(135deg, #3B82F6, #2563EB);">Print Labels
+                    Now</button>
+            </div>
+        </div>
+
+        <!-- Grid of labels -->
+        <div id="label-container" class="label-grid"></div>
+    </div>
+
+    <!-- App Logic -->
+    <script src="app.js"></script>
+</body>
+
+</html>
