@@ -1,0 +1,12 @@
+{
+  "name": "spinach-icecream-node",
+  "version": "1.0.0",
+  "description": "Supply Chain Ledger System for Spinach Ice Cream Original",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
