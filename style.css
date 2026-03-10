@@ -38,6 +38,13 @@ body {
     gap: 1rem;
 }
 
+@media (max-width: 600px) {
+    .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
 .glass-panel {
     background: var(--panel);
     backdrop-filter: blur(12px);
@@ -47,6 +54,21 @@ body {
     padding: 2.5rem;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 0 32px rgba(46, 232, 152, 0.02);
     transition: transform 0.3s ease;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 1rem;
+    }
+
+    .glass-panel {
+        padding: 1.5rem;
+        border-radius: 16px;
+    }
+
+    .header h1 {
+        font-size: 1.5rem;
+    }
 }
 
 .header {
@@ -178,6 +200,12 @@ button.secondary:hover {
     gap: 1rem;
     margin-bottom: 1.5rem;
     text-align: left;
+}
+
+@media (max-width: 480px) {
+    .data-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .data-item {
